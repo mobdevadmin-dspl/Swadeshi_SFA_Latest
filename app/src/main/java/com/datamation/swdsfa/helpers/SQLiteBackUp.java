@@ -68,7 +68,7 @@ public class SQLiteBackUp {
     public void exportDB() {
         try {
 
-            File folder = new File(Environment.getExternalStorageDirectory() + "/" + APP_NAME);
+            File folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), APP_NAME);
             boolean success = true;
             if (!folder.exists()) {
                 success = folder.mkdir();
@@ -78,13 +78,13 @@ public class SQLiteBackUp {
                 Date date = new Date();
                 System.out.println(dateFormat.format(date));
 
-                File sd = Environment.getExternalStorageDirectory();
+                File sd = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),APP_NAME);
                 File data = Environment.getDataDirectory();
 
                 if (sd.canWrite()) {
                     String currentDBPath = "//data//" + PACKAGE_NAME
                             + "//databases//" + DATABASE_NAME;
-                    String backupDBPath = "//SwadeshiSFA//backupname_"+dateFormat.format(date).toString()+".db"; // From SD directory.
+                    String backupDBPath = "//backupname_"+dateFormat.format(date).toString()+".db"; // From SD directory.
                     File currentDB = new File(data, currentDBPath);
                     File backupDB = new File(sd, backupDBPath);
 
